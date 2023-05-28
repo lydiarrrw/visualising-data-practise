@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;700&display=swap");
+
+//fonts
+$IBM-plex: "IBM Plex Sans", sans-serif;
+
+//colors
+$white: #ffffff;
+$dark-green: #004b54;
+
+body {
+  background-color: $white;
+  color: $dark-green;
+}
+
+main {
+  font-family: $IBM-plex;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px;
+}
+
+h1 {
+  font-size: 3rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+blockquote {
+  margin-top: 1rem;
+  font-weight: 500;
+  text-align: center;
+
+  &:after {
+    content: close-quote;
+    vertical-align: bottom;
+  }
+
+  &:before {
+    content: open-quote;
+    vertical-align: top;
+  }
+}
+
+.filter-container {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
+}
+
+.score-section {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.social-media-selector {
+  height: 50px;
+  width: 200px;
+  border-radius: 5px;
+}
+
+.score-container {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  flex-direction: row-reverse;
+
+  &__featured {
+    flex-basis: 100%;
+    background-color: $dark-green;
+    // height: 50%;
+    border-radius: 20px;
+    color: $white;
+
+    &__score {
+      font-size: 5rem;
+    }
+
+    .score-container__progress-container {
+      .CircularProgressbar {
+        max-width: 25rem;
+        min-width: 18rem;
+      }
+    }
+  }
+
+  &__progress-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+    flex-grow: 1;
+    flex-basis: 0;
+
+    .CircularProgressbar {
+      width: 50%;
+      max-width: 10rem;
+      min-width: 7rem;
+    }
+  }
+}

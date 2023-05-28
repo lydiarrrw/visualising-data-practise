@@ -1,12 +1,11 @@
-"use client"
-import Image from 'next/image'
-import styles from './page.module.css'
-import Chart from './Chart.js'
+"use client";
+import styles from "./styles.scss";
+import Dashboard from "./dashboard.js";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-     <Chart/>
-    </main>
-  )
+    <body>
+      <Dashboard />
+    </body>
+  );
 }

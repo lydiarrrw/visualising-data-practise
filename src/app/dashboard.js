@@ -1,8 +1,11 @@
 import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import FeaturedPanel from "./featured-panel.js";
 
-export default function Chart() {
+const Dashboard = ({ props }) => {
   const [fetchData, setFetchData] = useState([]);
   const monthsAndYears = [];
   const [socialMediaSource, setSocialMediaSource] = useState(
@@ -76,21 +79,51 @@ export default function Chart() {
   };
 
   return (
-    <main className={styles.main}>
-      <select value={socialMediaSource} onChange={handleChange}>
-        <option value="twitter,google,facebook">All</option>
-        <option value="twitter">Twitter</option>
-        <option value="facebook">Facebook</option>
-        <option value="google">Google</option>
-      </select>
-      {monthsAndYears.map((item) => {
-        return (
-          <div key={item.monthYear}>
-            <div>{item.monthYear}</div>
-            <div>{item.averageScore}</div>
+    <main>
+      <h1>Overall Recommended Scores</h1>
+      <div className="score-section">
+        <FeaturedPanel data={monthsAndYears} />
+        <section>
+          <div className="filter-container">
+            <select
+              className="social-media-selector"
+              value={socialMediaSource}
+              onChange={handleChange}
+            >
+              <option value="" disabled defaultValue hidden>
+                Filter by social media source:
+              </option>
+              <option value="twitter,google,facebook">All</option>
+              <option value="twitter">Twitter</option>
+              <option value="facebook">Facebook</option>
+              <option value="google">Google</option>
+            </select>
           </div>
-        );
-      })}
+
+          <div className="score-container">
+            {monthsAndYears.map((item, index) => {
+              if (index !== monthsAndYears.length - 1) {
+                return (
+                  <div
+                    className="score-container__progress-container"
+                    key={index}
+                  >
+                    <CircularProgressbar
+                      value={item.averageScore}
+                      maxValue={5}
+                      text={`${item.averageScore}`}
+                      styles={{ path: { stroke: "#004B54" } }}
+                    />
+                    <p>{item.monthYear}</p>
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </section>
+      </div>
     </main>
   );
-}
+};
+
+export default Dashboard;
